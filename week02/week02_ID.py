@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-def myfunction(inputSTR):
+def main(inputSTR):
     '''
     這支程式的主要函式(「函式」就是「功能」的意思！)
     '''
@@ -23,4 +23,4 @@ def myfunction(inputSTR):
 if __name__ == "__main__":
     nameSTR = "PeterWolf F123454321"
 
-    myfunction(nameSTR)
+    main(nameSTR)
