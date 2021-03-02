@@ -21,6 +21,6 @@ def main(inputSTR):
 # #字符號後，是 Python 會將之忽略的註解標記
 #程式進入點！ week02.py 這支程式從這裡開始「執行」！
 if __name__ == "__main__":
-    nameSTR = "PeterWolf F123454321"
+    nameSTR = "陳翰文 40907141E"
 
     main(nameSTR)
