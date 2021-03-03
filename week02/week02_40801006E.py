@@ -1,4 +1,3 @@
-  
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
@@ -7,7 +6,7 @@ def main(inputSTR):
     這支程式的主要函式(「函式」就是「功能」的意思！)
     '''
     print("Hello {}, {}".format(inputSTR, "你好"))
-    inputSubSTR = inputSTR[0:9] #用 substring 的方式取得字串中的某一部份
+    inputSubSTR = inputSTR[0:3] #用 substring 的方式取得字串中的某一部份
     print(inputSubSTR)
 
     inputSubLIST = inputSTR.split(" ") #用 split() 函式，透過空格把字串切割成列表
