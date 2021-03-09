@@ -11,14 +11,14 @@ def textReadAndPrint(txtFILE):
 
 def jsonFileWriter(jsonDICT, jsonFileName):
     """轉換 jsonDICT 為 json 格式的檔案，並存檔。檔名由 jsonFileName 指定。"""
-    with open(jsonFileName, mode="w") as f:
+    with open(jsonFileName, mode="w", encoding="utf-8") as f:
         json.dump(jsonDICT, f, ensure_ascii=False)
     return None
 
 if __name__ == "__main__":
     txtFilePath = "./example/sample.txt"
     txt = textReadAndPrint(txtFilePath)
-
+    print("讀到原始輸入字串：{}\n\n".format(txt.split("\n")))
     jsonDICT = {
     "name": {"zh":"", "en":""},
     "birth": {"year":"", "month":"", "date":""},
