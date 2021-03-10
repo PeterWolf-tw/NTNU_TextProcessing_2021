@@ -18,7 +18,8 @@ def jsonFileWriter(jsonDICT, jsonFileName):
 if __name__ == "__main__":
     txtFilePath = "./example/sample.txt"
     txt = textReadAndPrint(txtFilePath)
-    print("讀到原始輸入字串：{}\n\n".format(txt.split("\n")))
+    splitTxt = txt.split("\n");
+    print("讀到原始輸入字串：{}\n\n".format(splitTxt))
     jsonDICT = {
     "name": {"zh":"", "en":""},
     "birth": {"year":"", "month":"", "date":""},
@@ -28,18 +29,18 @@ if __name__ == "__main__":
     "spouse":""
     }
 
-    jsonDICT["name"]["zh"]      = txt.split("\n")[0].split(" ")[1]
-    jsonDICT["name"]["en"]      = " ".join(txt.split("\n")[1].split(" ")[1:])
-    jsonDICT["birth"]["year"]   = txt.split("\n")[2].split(" ")[1]
-    jsonDICT["birth"]["month"]  = txt.split("\n")[2].split(" ")[3]
-    jsonDICT["birth"]["date"]   = txt.split("\n")[2].split(" ")[5]
-    jsonDICT["job"]             = txt.split("\n")[3].split("\t")[1]
-    jsonDICT["language"]        = txt.split("\n")[4].split(" ")
-    jsonDICT["education"]       = txt.split("\n")[5].split(" ")
-    jsonDICT["spouse"]          = txt.split("\n")[6].split(" ")[1].split("（")[0]
+    jsonDICT["name"]["zh"]      = splitTxt[0].split(" ")[1]
+    jsonDICT["name"]["en"]      = " ".join(splitTxt[1].split(" ")[1:])
+    jsonDICT["birth"]["year"]   = splitTxt[2].split(" ")[1]
+    jsonDICT["birth"]["month"]  = splitTxt[2].split(" ")[3]
+    jsonDICT["birth"]["date"]   = splitTxt[2].split(" ")[5]
+    jsonDICT["job"]             = splitTxt[3].split("\t")[1]
+    jsonDICT["language"]        = splitTxt[4].split(" ")
+    jsonDICT["education"]       = splitTxt[5].split(" ")
+    jsonDICT["spouse"]          = splitTxt[6].split(" ")[1].split("（")[0]
 
     #上面這個區塊，有個地方讓電腦一直做一樣的事，似乎有讓它更有效率的寫法，不知道有沒有人想到呢？
 
     print(jsonDICT)
-    jsonFileName = "week03_YourSchoolID.json"
+    jsonFileName = "week03_40847024S.json"
     jsonFileWriter(jsonDICT, jsonFileName)

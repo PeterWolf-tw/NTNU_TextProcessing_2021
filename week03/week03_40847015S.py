@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import json
+import re
 
 def textReadAndPrint(txtFILE):
     """讀入指定的純文字 txtFILE 檔案路徑，並回傳該檔案的內容。"""
@@ -11,14 +12,16 @@ def textReadAndPrint(txtFILE):
 
 def jsonFileWriter(jsonDICT, jsonFileName):
     """轉換 jsonDICT 為 json 格式的檔案，並存檔。檔名由 jsonFileName 指定。"""
-    with open(jsonFileName, mode="w", encoding="utf-8") as f:
+    with open(jsonFileName, mode="w") as f:
         json.dump(jsonDICT, f, ensure_ascii=False)
     return None
 
 if __name__ == "__main__":
     txtFilePath = "./example/sample.txt"
     txt = textReadAndPrint(txtFilePath)
-    print("讀到原始輸入字串：{}\n\n".format(txt.split("\n")))
+    print("讀取 example.txt 中的文字 ")
+    print("{}\n".format(txt.split()))
+
     jsonDICT = {
     "name": {"zh":"", "en":""},
     "birth": {"year":"", "month":"", "date":""},
@@ -27,19 +30,23 @@ if __name__ == "__main__":
     "education":[],
     "spouse":""
     }
+    txt = re.split(r'[\t\n ]',txt)
 
-    jsonDICT["name"]["zh"]      = txt.split("\n")[0].split(" ")[1]
-    jsonDICT["name"]["en"]      = " ".join(txt.split("\n")[1].split(" ")[1:])
-    jsonDICT["birth"]["year"]   = txt.split("\n")[2].split(" ")[1]
-    jsonDICT["birth"]["month"]  = txt.split("\n")[2].split(" ")[3]
-    jsonDICT["birth"]["date"]   = txt.split("\n")[2].split(" ")[5]
-    jsonDICT["job"]             = txt.split("\n")[3].split("\t")[1]
-    jsonDICT["language"]        = txt.split("\n")[4].split(" ")
-    jsonDICT["education"]       = txt.split("\n")[5].split(" ")
-    jsonDICT["spouse"]          = txt.split("\n")[6].split(" ")[1].split("（")[0]
+    jsonDICT["name"]["zh"]      = txt[1]
+    jsonDICT["name"]["en"]      = txt[3] + ' ' + txt[4]
+    jsonDICT["birth"]["year"]   = txt[6]
+    jsonDICT["birth"]["month"]  = txt[8]
+    jsonDICT["birth"]["date"]   = txt[10]
+    jsonDICT["job"]             = txt[13]
+    jsonDICT["language"]        = txt[15].split('、')
+    jsonDICT["education"]       = txt[17].split('、')
+    jsonDICT["spouse"]          = txt[19][0:3]
 
     #上面這個區塊，有個地方讓電腦一直做一樣的事，似乎有讓它更有效率的寫法，不知道有沒有人想到呢？
 
-    print(jsonDICT)
-    jsonFileName = "week03_YourSchoolID.json"
+    jsonFileName = "week03_40847015S.json"
     jsonFileWriter(jsonDICT, jsonFileName)
+
+    file = textReadAndPrint(jsonFileName)
+    print("讀取 week03_40847015S.json 的內容 ")
+    print(file)

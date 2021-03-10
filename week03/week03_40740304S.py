@@ -39,7 +39,11 @@ if __name__ == "__main__":
     jsonDICT["spouse"]          = txt.split("\n")[6].split(" ")[1].split("（")[0]
 
     #上面這個區塊，有個地方讓電腦一直做一樣的事，似乎有讓它更有效率的寫法，不知道有沒有人想到呢？
-
-    print(jsonDICT)
-    jsonFileName = "week03_YourSchoolID.json"
+    
+    jsonFileName = "week03_40740304S.json"
     jsonFileWriter(jsonDICT, jsonFileName)
+
+    JF = textReadAndPrint(jsonFileName)
+    print("week03_40740304S.json: ")
+    print(JF)
+   
