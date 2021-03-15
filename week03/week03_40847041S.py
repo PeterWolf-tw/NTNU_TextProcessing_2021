@@ -5,7 +5,7 @@ import json
 
 def textReadAndPrint(txtFILE):
     """讀入指定的純文字 txtFILE 檔案路徑，並回傳該檔案的內容。"""
-    with open(txtFILE, encoding="utf-8") as f:S
+    with open(txtFILE, encoding="utf-8") as f:
         txtContent = f.read()
     return txtContent
 
