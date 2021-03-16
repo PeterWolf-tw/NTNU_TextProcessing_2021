@@ -12,7 +12,8 @@ def main(txtFILE):
 
 if __name__== "__main__":
 
-
+    DogPeople = "./example/DogPeople.txt"
+    PeopleDog = "./example/PeopleDog.txt"
     fileTUPLE = (DogPeople, PeopleDog)
     txtSTR = main(fileTUPLE[0])
 
@@ -30,6 +31,10 @@ if __name__== "__main__":
     pbdLIST = [("婦人", xINT), ("土狗", yINT), ("男", zINT)]
     print(fileTUPLE[1].split("/")[1], pbdLIST)
 
+
+
+    #請在這一段設計你的程式，讓 resultDICT 內的 x_int, y_int, z_int 都有正確的值
+    # Your Code Here
     resultDICT = {"DogPeople":{"婦人":x_int,
                                "土狗":y_int,
                                "男": z_int
@@ -40,11 +45,15 @@ if __name__== "__main__":
                                },
     }
 
-    #請在這一段設計你的程式，讓 resultDICT 內的 x_int, y_int, z_int 都有正確的值
-    # Your Code Here
-
-
-
-
+    #答案會像
+    #resultDICT = {"DogPeople":{"婦人":3,
+                               #"土狗":3,
+                               #"男": 4
+                               #},
+                  #"PeopleDog":{"婦人":3,
+                               #"土狗":3,
+                               #"男": 4
+                               #},
+    #}
     #
     print(resultDICT)
