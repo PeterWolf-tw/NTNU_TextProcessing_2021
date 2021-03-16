@@ -11,7 +11,7 @@ def main(txtFILE):
 
 
 if __name__== "__main__":
-
+    fileTUPLE = ("example/dbp.txt", "example/pbd.txt")
     DogPeople = "./example/DogPeople.txt"
     PeopleDog = "./example/PeopleDog.txt"
     fileTUPLE = (DogPeople, PeopleDog)
