@@ -35,13 +35,13 @@ if __name__== "__main__":
 
     #請在這一段設計你的程式，讓 resultDICT 內的 x_int, y_int, z_int 都有正確的值
     # Your Code Here
-    resultDICT = {"DogPeople":{"婦人":x_int=x,
-                               "土狗":y_int=y,
-                               "男": z_int=z
+    resultDICT = {"DogPeople":{"婦人":x,
+                               "土狗":y,
+                               "男": z
                                },
-                  "PeopleDog":{"婦人":x_int=xINT,
-                               "土狗":y_int=yINT,
-                               "男": z_int=zINT
+                  "PeopleDog":{"婦人":xINT,
+                               "土狗":yINT,
+                               "男":zINT
                                },
     }
 
