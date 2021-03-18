@@ -40,7 +40,6 @@ if __name__ == "__main__":
     jsonDICT["education"]       = txt[17].split('、')
     jsonDICT["spouse"]          = txt[19][0:3]
 
-
     jsonFileName = "week03_40847011S.json"
     jsonFileWriter(jsonDICT, jsonFileName)
 
