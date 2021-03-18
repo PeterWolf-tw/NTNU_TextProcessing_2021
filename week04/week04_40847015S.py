@@ -33,15 +33,15 @@ if __name__== "__main__":
 
 
 
-    #請在這一段設計你的程式，讓 resultDICT 內的 x_int, y_int, z_int 都有正確的值
+    #請在這一段設計你的程式，讓 resultDICT 內的 xINT, yINT, zINT 都有正確的值
     # Your Code Here
-    resultDICT = {"DogPeople":{"婦人":x_int=x,
-                               "土狗":y_int=y,
-                               "男": z_int=z
+    resultDICT = {"DogPeople":{"婦人":x,
+                               "土狗":y,
+                               "男": z
                                },
-                  "PeopleDog":{"婦人":x_int=xINT,
-                               "土狗":y_int=yINT,
-                               "男": z_int=zINT
+                  "PeopleDog":{"婦人":xINT,
+                               "土狗":yINT,
+                               "男": zINT
                                },
     }
 
@@ -56,4 +56,6 @@ if __name__== "__main__":
                                #},
     #}
     #
+    # 不一樣 因為雖然名詞的數目都一樣多 
+    # 但是出現的位置恰好不一樣 所以會是完全不同的結果
     print(resultDICT)
