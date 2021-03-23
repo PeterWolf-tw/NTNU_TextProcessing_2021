@@ -40,6 +40,7 @@ if __name__ == "__main__":
 
     #上面這個區塊，有個地方讓電腦一直做一樣的事，似乎有讓它更有效率的寫法，不知道有沒有人想到呢？
 
+
     print(jsonDICT)
     jsonFileName = "week03_YourSchoolID.json"
     jsonFileWriter(jsonDICT, jsonFileName)
