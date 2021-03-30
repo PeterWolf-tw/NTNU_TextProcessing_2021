@@ -93,7 +93,83 @@ if __name__ == "__main__":
 
     print(coRefDICT) #{'自己': ['大雄', '妹妹', '靜香']}
 
+    #a-----------------------------------------
+    
+    inputSTR = "小夫告訴大雄其實靜香喜歡的是他" 
+    inputLIST = ["小夫", "告訴", "大雄", "其實", "靜香", "喜歡", "的", "是", "他"]
+    coRefDICT = {inputLIST[8] : []}
 
-    inputSTR = "小夫告訴大雄其實靜香喜歡的是他 " ans: {"他": ["小夫", "大雄"]}
-    inputSTR = "大雄知道靜香喜歡的是自己 "      ans: {"自己": ["大雄", "靜香"]}
-    inputSTR = "大雄聽胖虎說靜香愛的是自己 "    ans: {"自己": ["大雄", "胖虎", "靜香"]}
+    resultBOOL = cCommandCoRefResolver(inputLIST, inputLIST[8], inputLIST[0])
+    if resultBOOL == True:
+        coRefDICT[inputLIST[8]].append(inputLIST[0])
+    elif resultBOOL == None:
+        pass
+    else:
+        pass
+
+    resultBOOL = cCommandCoRefResolver(inputLIST, inputLIST[8], inputLIST[2])
+    if resultBOOL == True:
+        coRefDICT[inputLIST[8]].append(inputLIST[2])
+    elif resultBOOL == None:
+        pass
+    else:
+        pass
+
+    print(coRefDICT)
+
+    #b------------------------------------------------
+
+    inputSTR = "大雄知道靜香喜歡的是自己"      
+    inputLIST = ["大雄", "知道", "靜香", "喜歡", "的", "是", "自己"]
+    coRefDICT = {inputLIST[6] : []}
+
+    resultBOOL = cCommandCoRefResolver(inputLIST, inputLIST[6], inputLIST[0])
+    if resultBOOL == True:
+        coRefDICT[inputLIST[6]].append(inputLIST[0])
+    elif resultBOOL == None:
+        pass
+    else:
+        pass
+
+    resultBOOL = cCommandCoRefResolver(inputLIST, inputLIST[6], inputLIST[2])
+    if resultBOOL == True:
+        coRefDICT[inputLIST[6]].append(inputLIST[2])
+    elif resultBOOL == None:
+        pass
+    else:
+        pass
+
+    print(coRefDICT)
+
+    #c----------------------------------------------
+
+    
+    inputSTR = "大雄聽胖虎說靜香愛的是自己"    
+    inputLIST = ["大雄", "聽", "胖虎", "說", "靜香", "愛", "的", "是", "自己"]
+    coRefDICT = {inputLIST[8] : []}
+
+    resultBOOL = cCommandCoRefResolver(inputLIST, inputLIST[8], inputLIST[0])
+    if resultBOOL == True:
+        coRefDICT[inputLIST[8]].append(inputLIST[0])
+    elif resultBOOL == None:
+        pass
+    else:
+        pass
+
+    resultBOOL = cCommandCoRefResolver(inputLIST, inputLIST[8], inputLIST[2])
+    if resultBOOL == True:
+        coRefDICT[inputLIST[8]].append(inputLIST[2])
+    elif resultBOOL == None:
+        pass
+    else:
+        pass
+
+    resultBOOL = cCommandCoRefResolver(inputLIST, inputLIST[8], inputLIST[4])
+    if resultBOOL == True:
+        coRefDICT[inputLIST[8]].append(inputLIST[4])
+    elif resultBOOL == None:
+        pass
+    else:
+        pass
+
+    print(coRefDICT)
