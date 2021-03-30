@@ -1,0 +1,9 @@
+.vscode
+.DS_Store
+.*
+__pycache__*
+*.model
+*.npy
+*.zip
+*.wpu
+*.wpr
