@@ -36,7 +36,7 @@ if __name__== "__main__":
     
     #將讀出來的內容字串傳給 [將字串轉為「句子」 列表」]的程式，存為 newsLIST
     newsLIST = sentence2LIST(jsonDICT) 
-    newsLIST.pop(len(newsLIST)-1)
+    newsLIST.remove(newsLIST[-1])
     #設定要讀取的 test.json 路徑
     testPath = "./example/test.json"   
     
