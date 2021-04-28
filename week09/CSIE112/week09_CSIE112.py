@@ -15,6 +15,14 @@ def json2DictReader(jsonFilePath):
     '''
 
 def termFreq(wordLIST):
+    mydict = dict()
+    for sentence in inputLIST:
+        for word in sentence.split("|"):
+            if mydict.get(word):
+                mydict[word] = mydict.get(word) + 1
+            else:
+                mydict[word] = 1 
+    return mydict
     '''
     設計一個計算 wordLIST 中，每個 word 出現次數的函式
     '''
@@ -29,6 +37,7 @@ if __name__ == "__main__":
     # 把 "tourblog.json" 中的「行政地名」和「景點名稱」取出，
     # 另存入兩個 LIST，再將這兩個 LIST 存成 tourblog_geoinfo.json 檔。
     # 內容為 {"location": [....], "place":[....]}
+
 
 
 
