@@ -2,10 +2,14 @@
 # -*- coding:utf-8 -*-
 
 import json
-from ArticutAPI import Articut
+from ArticutAPI import ArticutAPI
 
 
 def json2DictReader(jsonFilePath):
+    with open(jsonFilePath,encoding="utf-8") as f :
+        returnDICT = f.read()
+    returnDICT=json.loads(returnDICT)
+    return returnDICT
     '''
     設計一個把 .json 檔開啟成 DICT 的函式
     '''
@@ -15,12 +19,12 @@ def termFreq(wordLIST):
     設計一個計算 wordLIST 中，每個 word 出現次數的函式
     '''
 
-
-
 if __name__ == "__main__":
     #讀入 account.info 檔，並將內容的 email 和 apikey 輸入 Articut() 做為帳號資訊
-
-
+    userDICT = json2DictReader("./account.info")
+    username = userDICT["username"]
+    apikey = userDICT["apikey"]
+    articut = ArticutAPI.Articut(username,apikey)
 
     # 把 "tourblog.json" 中的「行政地名」和「景點名稱」取出，
     # 另存入兩個 LIST，再將這兩個 LIST 存成 tourblog_geoinfo.json 檔。
