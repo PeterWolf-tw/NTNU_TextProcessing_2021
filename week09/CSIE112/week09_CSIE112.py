@@ -44,6 +44,7 @@ def jsonFileWriter(jsonDICT, jsonFileName):
 def tourblogfunct(inputSTR):
     inputDICT = articut.parse(inputSTR, level = "lv2", openDataPlaceAccessBOOL = True)
     temlist = articut.getOpenDataPlaceLIST(inputDICT)
+
     placelist = []
     for item in temlist:
         if item != []:
@@ -55,13 +56,27 @@ def tourblogfunct(inputSTR):
             locationlist.append( item[0][2] )
     resultDICT = {"lacaion": locationlist, "place": placelist}
     return resultDICT
-
+def removeEOL( inputSTR):
+    for i in ("\r\n"):
+        inputSTR = inputSTR.replace( i, "")
+    return inputSTR
 def justicefunct(inputSTR):
-	inputDICT = articut.parse(inputSTR, level = "lv2")
-	lawTK = ArticutAPI.LawsToolkit(inputDICT)
-	judgementLIST = lawTK.getLawArticle()
-	resultDICT = {"liability": judgementLIST}
-	return resultDICT
+    inputSTR = removeEOL(inputSTR)
+    inputDICT = articut.parse(inputSTR, level = "lv2")
+    lawTK = ArticutAPI.LawsToolkit(inputDICT)
+    judgementLIST = lawTK.getLawArticle()
+    resultDICT = {"liability": judgementLIST}
+    return resultDICT
+
+def newsfunct(inputSTR):
+
+    peopleLIST = []
+    locationLIST = []
+    moneyLIST = []
+    #TODO
+    # {"people":[(人名, 次數), (人名, 次數),...], "location":[...], "money":[...]}
+    resultDICT = {"people": peopleLIST , "location": locationLIST, "money": moneyLIST}
+    return resultDICT
 '''
 jsonFilePath: 檔案位置
 attribute: 要取得 json 的資料欄位名 
@@ -75,11 +90,16 @@ def dealJson( jsonFilePath, attribute, articutdel, jsonFileName):
     # 使用 atricutdel 選擇處理用的function
     if articutdel == "__tourblogfunct__":
         resultDICT = tourblogfunct(inputSTR)
-    elif articut == "__justicefunct__":
+    elif articutdel == "__justicefunct__":
     	resultDICT = justicefunct(inputSTR)
+    elif articutdel == __newsfunct__:
+        resultDICT = 
+    else:
+        resultDICT = {}
     # 寫入檔案
     jsonFileWriter( resultDICT, jsonFileName)
     pprint(resultDICT)
+    return None
 
 if __name__ == "__main__":
     #讀入 account.info 檔，並將內容的 email 和 apikey 輸入 Articut() 做為帳號資訊
@@ -102,7 +122,5 @@ if __name__ == "__main__":
     #    地點列出
     #    涉案金額列出
     #    將以上資訊另存為 news_info.json 檔，內容為 {"people":[(人名, 次數), (人名, 次數),...], "location":[...], "money":[...]}
-    jsonSTR = jsonTextReader( "../example/tourblog.json", "content")
-    # TODO
-    resultDICT = articut.parse(inputSTR, level="lv3", openDataPlaceAccessBOOL="True")
+    dealJson( "../example/tourblog.json", "content", "__newsfunct__", "news_info.json")
     
