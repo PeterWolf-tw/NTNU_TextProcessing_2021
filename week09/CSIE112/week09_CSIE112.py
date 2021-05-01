@@ -4,6 +4,7 @@
 import json
 from ArticutAPI import ArticutAPI
 from pprint import pprint
+from requests import post
 
 def json2DictReader(jsonFilePath):
     with open(jsonFilePath,encoding="utf-8") as f :
@@ -38,6 +39,42 @@ def jsonFileWriter(jsonDICT, jsonFileName):
     with open(jsonFileName, mode="w", encoding="utf-8") as f:
         json.dump(jsonDICT, f, ensure_ascii=False)
     return None
+
+def tourblogfunct(inputSTR):
+    resultDICT = articut.parse(inputSTR, level = "lv2", openDataPlaceAccessBOOL = True)
+
+    temlist = articut.getOpenDataPlaceLIST(resultDICT)
+    placelist = []
+    # TODO
+    for item in temlist:
+        if item != []:
+            placelist.append( item[0][2] )
+    temlist = articut.getLocationStemLIST(resultDICT)
+    locationlist = []
+    # TODO
+    for item in temlist:
+        if item != []:
+            locationlist.append( item[0][2] )
+    # TODO
+    resultDICT = {"lacaion": locationlist, "place": placelist}
+    return resultDICT
+'''
+jsonFilePath: 檔案位置
+attribute: 要取得 json 的資料欄位名 
+articutdel: 處理檔案要用的function
+jsonFileName: 檔案儲存名字
+'''
+def dealJson( jsonFilePath, attribute, articutdel, jsonFileName):
+    # 讀取檔案
+    inputSTR = jsonTextReader( jsonFilePath, attribute)
+
+    # 使用 atricutdel 選擇處理用的function
+    if articutdel == "__tourblogfunct__":
+        resultDICT = tourblogfunct(inputSTR)
+    # 寫入檔案
+    jsonFileWriter( resultDICT, jsonFileName)
+    pprint(resultDICT)
+
 if __name__ == "__main__":
     #讀入 account.info 檔，並將內容的 email 和 apikey 輸入 Articut() 做為帳號資訊
     userDICT = json2DictReader("../account.info")
@@ -49,15 +86,17 @@ if __name__ == "__main__":
     # 另存入兩個 LIST，再將這兩個 LIST 存成 tourblog_geoinfo.json 檔。
     # 內容為 {"location": [....], "place":[....]}
 
-    inputSTR = jsonTextReader( "../example/tourblog.json", "content")
-    resultDICT = articut.parse(inputSTR)
-    jsonFileWriter( resultDICT, "tourblog_geoinfo.json")
-    pprint(resultDICT)
+    dealJson( "../example/tourblog.json", "content", "__tourblogfunct__", "tourblog_geoinfo.json")
+    
+    '''
     # 把 "刑事判決_106,交簡,359_2017-02-21.json" 中 "mainText" 欄位裡的刑罰取出，
     # 另存為 justice.json 檔，內容為 {"liability": "<你取出的刑罰>"}。
 
     jsonSTR = jsonTextReader( "../example/刑事判決_106,交簡,359_2017-02-21.json", "judgement")
+    # TODO
     resultDICT = articut.parse(inputSTR)
+    
+    # 寫入檔案
     jsonFileWriter( resultDICT, "justice.json.json")
     pprint(resultDICT)
 
@@ -67,6 +106,9 @@ if __name__ == "__main__":
     #    涉案金額列出
     #    將以上資訊另存為 news_info.json 檔，內容為 {"people":[(人名, 次數), (人名, 次數),...], "location":[...], "money":[...]}
     jsonSTR = jsonTextReader( "../example/tourblog.json", "content")
-    resultDICT = articut.parse(inputSTR)
+    # TODO
+    resultDICT = articut.parse(inputSTR, level="lv3", openDataPlaceAccessBOOL="True")
+    # 讀取檔案
     jsonFileWriter( resultDICT, "news_info.json.json")
     pprint(resultDICT)
+    '''
