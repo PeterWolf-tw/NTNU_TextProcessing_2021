@@ -11,9 +11,9 @@ CODE BY CSIE112
 '''
 
 def json2DictReader(jsonFilePath):
-	with open(jsonFilePath,encoding="utf-8") as f :
+	with open(jsonFilePath, encoding = "utf-8") as f :
 		returnDICT = f.read()
-	returnDICT=json.loads(returnDICT)
+	returnDICT = json.loads(returnDICT)
 	return returnDICT
 	'''
 	設計一個把 .json 檔開啟成 DICT 的函式
@@ -47,23 +47,30 @@ def jsonFileWriter(jsonDICT, jsonFileName):
 
 def tourblogfunct(inputSTR):
 	inputDICT = articut.parse(inputSTR, level = "lv2", openDataPlaceAccessBOOL = True)
+	pprint(inputDICT)
+	
 	temlist = articut.getOpenDataPlaceLIST(inputDICT)
-
 	placelist = []
-	for item in temlist:
-		if item != []:
-			placelist.append( item[0][2] )
+	if(temlist != None):
+		for item in temlist:
+			if item != []:
+				placelist.append( item[0][2] )
+
 	temlist = articut.getLocationStemLIST(inputDICT)
 	locationlist = []
-	for item in temlist:
-		if item != []:
-			locationlist.append( item[0][2] )
+	if(temlist != None):
+		for item in temlist:
+			if item != []:
+				locationlist.append( item[0][2] )
 	resultDICT = {"lacaion": locationlist, "place": placelist}
 	return resultDICT
+	
+
 def removeEOL( inputSTR):
 	for i in ("\r\n"):
 		inputSTR = inputSTR.replace( i, "")
 	return inputSTR
+
 def justicefunct(inputSTR):
 	inputSTR = removeEOL(inputSTR)
 	inputDICT = articut.parse(inputSTR, level = "lv2")
@@ -136,7 +143,7 @@ def dealJson( jsonFilePath, attribute, articutdel, jsonFileName):
 
 if __name__ == "__main__":
 	#讀入 account.info 檔，並將內容的 email 和 apikey 輸入 Articut() 做為帳號資訊
-	userDICT = json2DictReader("./account.info")
+	userDICT = json2DictReader("../account.info")
 	username = userDICT["username"]
 	apikey = userDICT["apikey"]
 	articut = ArticutAPI.Articut( username, apikey)
