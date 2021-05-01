@@ -46,9 +46,7 @@ def jsonFileWriter(jsonDICT, jsonFileName):
 	return None
 
 def tourblogfunct(inputSTR):
-	inputDICT = articut.parse(inputSTR, level = "lv2", openDataPlaceAccessBOOL = True)
-	pprint(inputDICT)
-	
+	inputDICT = articut.parse(inputSTR, level = "lv2", openDataPlaceAccessBOOL = True)	
 	temlist = articut.getOpenDataPlaceLIST(inputDICT)
 	placelist = []
 	if(temlist != None):
