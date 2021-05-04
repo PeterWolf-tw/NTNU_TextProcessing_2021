@@ -161,3 +161,5 @@ if __name__ == "__main__":
 	#	將以上資訊另存為 news_info.json 檔，內容為 {"people":[(人名, 次數), (人名, 次數),...], "location":[...], "money":[...]}
 	dealJson( "../example/news.json", "content", "__newsfunct__", "news_info.json")
 	
+
+# this code is made by CSIE112, who ctrl + A ctrl + C ctrl + V this code without modify is an idiot. LUL
