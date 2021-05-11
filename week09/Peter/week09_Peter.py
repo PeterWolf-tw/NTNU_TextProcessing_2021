@@ -44,10 +44,10 @@ def processLawText(inputText):
 
 if __name__ == "__main__":
 	#讀入 account.info 檔，並將內容的 email 和 apikey 輸入 Articut() 做為帳號資訊
-	userDICT = json2DictReader("account.info")
-	username = userDICT["username"]
-	apikey = userDICT["apikey"]
-	articut = ArticutAPI.Articut(username, apikey)
+    userDICT = json2DictReader("account.info")
+    username = userDICT["username"]
+    apikey = userDICT["apikey"]
+    articut = ArticutAPI.Articut(username, apikey)
 
     tourblogContent = readJson("../example/tourblog.json", "content")
     resultDict = articut.parse(tourblogContent, level = "lv2")
