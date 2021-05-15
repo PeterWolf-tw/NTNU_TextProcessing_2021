@@ -145,7 +145,7 @@ if __name__== "__main__":
 	wordCount_dbp = wordCounter(dbpCuttedstr)
 
 	dbpDICT["wordCount_dbp"] = wordCount_dbp
-	pbdDICT["wordChount_pbd"] = wordChount_pbd
+	pbdDICT["wordCount_pbd"] = wordCount_pbd
 
 # 計算兩文本含有詞性標記的字詞出現次數 (如本簡報 p9)，並存成 posWordCount_dbp 和 posWordCount_pbd
 	tmpDICT = articut.parse(pbdstr)
