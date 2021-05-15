@@ -96,6 +96,12 @@ def contentWordPlusPosCounter(inputSTR):
     wordCountLIST.sort(key=lambda c: c[1], reverse=True)
     return wordCountLIST
 
+def except_FUNC_label(inputLIST):
+	returnLIST = []
+	for i in inputLIST :
+		if 'FUNC' not in i[0] :
+			returnLIST.append(i) 
+
 if __name__== "__main__":
 	userDICT = json2DictReader("../../account.info")
 	username = userDICT["username"]
@@ -144,8 +150,10 @@ if __name__== "__main__":
 	pprint(posWordCount_dbp)
 
 # 計算兩文本「去除功能詞」(如本簡報 p10)，並存成 contentWord_dbp 和 contentWord_pbd 
-#todo
+	contentWord_dbp = except_FUNC_label(posWordCount_dbp)
+	contentWord_pbd = except_FUNC_label(posWordCount_pbd)
+
 # 將以上所有的 _dbp 都存入 count_result.json 裡
-#todo
+	#todo
 
 # 請仔細觀察前述兩兩一組的 _dbp vs. _pbd 的結果，並小組討論「是否能從詞頻裡分辨究竟哪一篇是人咬狗，哪一篇是狗咬人？。若能，是為什麼，若不能，又是為什麼。」討論結果請另存成 discussion_分隊隊名.txt 一併上傳到課程 week11 的 repo 裡。
