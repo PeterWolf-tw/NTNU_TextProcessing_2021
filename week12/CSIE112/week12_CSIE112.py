@@ -27,8 +27,8 @@ def txtReader(txtFilePath):
 		returnTXT = f.read()
 	return returnTXT	
 
-def main(inputSTR, nlptool):
-	resultDICT = articut.parse(inputSTR, level="lv3")
+def main(inputSTR, nlptool, levelop):
+	resultDICT = articut.parse(inputSTR, level=levelop)
 	return resultDICT
 
 def jsonFileWriter(jsonDICT, jsonFileName):
@@ -62,6 +62,12 @@ def easy2Sentence(inputSTR):
 			inputLIST.remove(i)
 	return inputLIST
 
+# 把 eventLIST 寫入 DICT
+def addDICT( jsonDICT, key, eventLIST):
+	for i in eventLIST:
+		if not (i == '\n' or i == []):
+			jsonDICT[key].append( tuple(i))
+	return jsonDICT
 
 if __name__== "__main__":
 
@@ -72,39 +78,42 @@ if __name__== "__main__":
 		"apikey":
 	}
 	'''
-
-	inputSTR = "倉鼠偶爾也會吃穴居昆蟲"
 	articut = articutLogIn("../../account.info")
-	resultLIST = main(inputSTR, articut)
-	pprint( resultLIST)
+	
+	jsonDICT = {"倉鼠":[], "皇帝企鵝":[]}
 
-	# resultLIST = articut.getVerbStemLIST()
-	# pprint( resultLIST)
-	# eventLIST = resultLIST["event"]
-	# print(eventLIST)
+	# 處理倉鼠
 
-	# # 處理倉鼠
+	inputSTR = txtReader("../example/text.txt")
+	inputLIST = easy2Sentence(inputSTR)
 
-	# ''' 處理 text.txt
-	# 切成句子的LIST
-	# '''
-	# inputSTR = txtReader("../example/text.txt")
-	# inputLIST = easy2Sentence(inputSTR)
-	# testSTR = "倉鼠偶爾也會吃穴居昆蟲"
-	# resultLIST = main(testSTR, articut)
-	# print(resultLIST)
-	# puipuiLIST = 
-	# for i in inputLIST:
-	# 	puipuiLIST.append(main( i, articut))
-	# 	print( puipuiLIST)
+	'''
+	用 lv3 取得 event
+	'''
+	puipuiDICT_lv3 = main(inputSTR, articut, "lv3")
+	puipuiEventLIST = puipuiDICT_lv3["event"]
+
+	# 倉鼠的知識，存入 json
+ 	# pprint( puipuiEventLIST )
+
+	jsonDICT = addDICT( jsonDICT, "倉鼠", puipuiEventLIST)
+	# print( jsonDICT)
+	'''
+	用 lv2 切，取得 Verb
+	'''
+	puipuiDICT_lv2 = main(inputSTR, articut, "lv2")
+	puipuiVerbLIST = articut.getVerbStemLIST(puipuiDICT_lv2)
+	pprint( puipuiVerbLIST)
 
 	# 處理皇帝企鵝
+	
 	# TODO
 
 
-	# example 內的 code 
-	# resultLIST = main(inputSTR, articut)
-	# print(resultLIST)
+	# 皇帝企鵝的知識，存入 json
+	jsonDICT = addDICT( jsonDICT, "皇帝企鵝", penguinEventLIST)
+	# 確認沒問題刪掉這行註解下面 print
+	print( jsonDICT)
 
-	# eventLIST = resultLIST["event"]
-	# print(eventLIST)
+	# 將 jsonDICT 存入 week12_CSIE112.json
+	jsonFileWriter( jsonDICT, "./week12_CSIE112.json")
