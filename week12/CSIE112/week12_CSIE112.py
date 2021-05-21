@@ -4,13 +4,16 @@
 CODE BY CSIE112
 '''
 import json
-from ArticutAPI import Articut
+import ArticutAPI 
+from pprint import pprint
+from requests import post
+
 
 def articutLogIn(inforpath):
 	userDICT = json2DictReader(inforpath)
 	username = userDICT["username"]
 	apikey = userDICT["apikey"]
-	articut = Articut( username, apikey)
+	articut = ArticutAPI.Articut( username, apikey)
 	return articut
 
 def json2DictReader(jsonFilePath):
@@ -69,17 +72,31 @@ if __name__== "__main__":
 		"apikey":
 	}
 	'''
+
+	inputSTR = "倉鼠偶爾也會吃穴居昆蟲"
 	articut = articutLogIn("../../account.info")
+	resultLIST = main(inputSTR, articut)
+	pprint( resultLIST)
 
-	# 處理倉鼠
+	# resultLIST = articut.getVerbStemLIST()
+	# pprint( resultLIST)
+	# eventLIST = resultLIST["event"]
+	# print(eventLIST)
 
-	''' 處理 text.txt
-	切成句子的LIST
-	'''
-	inputSTR = txtReader("../example/text.txt")
-	inputLIST = easy2Sentence(inputSTR)
+	# # 處理倉鼠
 
-	# TODO
+	# ''' 處理 text.txt
+	# 切成句子的LIST
+	# '''
+	# inputSTR = txtReader("../example/text.txt")
+	# inputLIST = easy2Sentence(inputSTR)
+	# testSTR = "倉鼠偶爾也會吃穴居昆蟲"
+	# resultLIST = main(testSTR, articut)
+	# print(resultLIST)
+	# puipuiLIST = 
+	# for i in inputLIST:
+	# 	puipuiLIST.append(main( i, articut))
+	# 	print( puipuiLIST)
 
 	# 處理皇帝企鵝
 	# TODO
