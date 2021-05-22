@@ -25,7 +25,7 @@ def FindNER(posLIST):
     return nerLIST
 
 if __name__ == "__main__":
-    jsonFilePath = "./example/foxnews.json"                                           
+    jsonFilePath = "../example/foxnews.json"                                           
     with open(jsonFilePath, "r", encoding = "utf-8") as f:
         foxnewsDICT = json.load(f)
         foxnewsSTR = foxnewsDICT["content"]

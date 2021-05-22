@@ -5,9 +5,9 @@ import json
 from ArticutAPI import ArticutAPI
 
 def jsonTextReader(jsonFilePath):
-    with open(jsonFilePath, "r", encoding = "utf8") as f:
-        jsonContent = json.load(f)
-    return jsonContent    
+    with open(jsonFilePath,  encoding = "utf-8") as f:
+        Content = f.read()
+    return Content    
 
 def jsonFileWriter(jsonDICT, jsonFileName):
     with open(jsonFileName, mode="w") as f:
@@ -73,18 +73,18 @@ def contentWordPlusPosCounter(inputSTR):#計算「內容字詞」(非功能字/�
 
 
 if __name__== "__main__":
-# 把 "dbp.txt" 和 "pbd.txt" 的內容取出進行詞頻計算。
-    fileTUPLE = ("./example/dbp.txt", "./example/pbd.txt")
+    #把 "dbp.txt" 和 "pbd.txt" 的內容取出進行詞頻計算。
+    fileTUPLE = ("../example/dbp.txt", "../example/pbd.txt")
     dbpSTR = jsonTextReader(fileTUPLE[0])
     
     pbdSTR = jsonTextReader(fileTUPLE[1])   
-# 計算兩文本的「字符」出現次數 (如同本簡報 p8 上半頁)，並存成 charCount_dbp 和 charCount_pbd
+    #計算兩文本的「字符」出現次數 (如同本簡報 p8 上半頁)，並存成 charCount_dbp 和 charCount_pbd
     charCount_dbp = charCounter(dbpSTR)
     print(charCount_dbp)
     
     charCount_pbd = charCounter(pbdSTR)
     print(charCount_pbd)
-# 計算兩文本的「字詞」出現次數 (如同本簡報 p8 下半頁)，並存成 wordCount_dbp 和 wordChount_pbd
+    #計算兩文本的「字詞」出現次數 (如同本簡報 p8 下半頁)，並存成 wordCount_dbp 和 wordChount_pbd
     articut = ArticutAPI.Articut()
     segdbpSTR = ""
     for i in range(0, len(dbpSTR), 2000):
@@ -101,7 +101,7 @@ if __name__== "__main__":
     print(segpbdSTR)
     wordCount_pbd = wordCounter(segpbdSTR)
     print(wordCount_pbd)    
-# 計算兩文本含有詞性標記的字詞出現次數 (如本簡報 p9)，並存成 posWordCount_dbp 和 posWordCount_pbd
+    #計算兩文本含有詞性標記的字詞出現次數 (如本簡報 p9)，並存成 posWordCount_dbp 和 posWordCount_pbd
     posdbpLIST = []
     for i in range(0, len(dbpSTR), 2000):
         dbpDICT = articut.parse(dbpSTR[i:i+2000])
@@ -117,12 +117,12 @@ if __name__== "__main__":
     pospbdSTR = "".join([p for p in pospbdLIST if len(p) > 1])
     posWordCount_pbd = wordPlusPosCounter(pospbdSTR)
     print(posWordCount_pbd)
-# 計算兩文本「去除功能詞」(如本簡報 p10)，並存成 contentWord_dbp 和 contentWord_pbd 
+    #計算兩文本「去除功能詞」(如本簡報 p10)，並存成 contentWord_dbp 和 contentWord_pbd 
     contentdbpLIST = []
     for i in range(0, len(dbpSTR), 2000):
         resultDICT = articut.parse(dbpSTR[i:i+2000])
         contentdbpLIST = articut.getContentWordLIST(dbpDICT)
-        for c in dbpcontentLIST:
+        for c in contentdbpLIST:
             if len(c) > 0:
                 for w in c:
                     contentdbpLIST.append(w[-1])
@@ -141,7 +141,7 @@ if __name__== "__main__":
     posContentpbdSTR = "/".join(contentpbdLIST)
     contentWord_pbd = contentWordPlusPosCounter(posContentpbdSTR)
     print(contentWord_pbd)    
-# 將以上所有的 _dbp 都存入 count_result.json 裡
+    #將以上所有的 _dbp 都存入 count_result.json 裡
     print(dbpDICT)
     MyjsonName1 = "dbp_count_result.json"
     jsonFileWriter(dbpDICT, MyjsonName1)   

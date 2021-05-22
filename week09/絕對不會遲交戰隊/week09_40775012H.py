@@ -3,11 +3,13 @@
 
 import json
 from ArticutAPI import Articut
+from ArticutAPI import ArticutAPI
 
-def jsonTextReader(jsonFilePath):
-    with open(jsonFilePath, "r", encoding = "utf8") as f:
-        jsonContent = json.load(f)
-    return jsonContent    
+def jsonTextReader(jsonFilePath, field):
+    with open(jsonFilePath, encoding = "utf-8") as f:
+        Content = f.read()
+    Content = json.loads(Content)
+    return Content[field] 
 
 def jsonFileWriter(jsonDICT, jsonFileName):
     with open(jsonFileName, mode="w") as f:
@@ -15,21 +17,21 @@ def jsonFileWriter(jsonDICT, jsonFileName):
     return None
 
 def location(inputDICT):
-    locLIST = articut.getLocationStemLIST(inputDICT)
-    #temlist = articut.getLocationStemLIST(inputDICT)
-    #    locLIST = []
-    #    for i in temlist:
-    #        if i != [] and i[0][2] not in locLIST: 
-    #            locLIST.append(i[0][2])    
+    temp = articut.getLocationStemLIST(inputDICT)
+    locLIST = []
+    if(temp != None):
+        for i in temp:
+            if i != [] and i[0][2] not in locLIST: 
+                locLIST.append(i[0][2])    
     return locLIST
     
 def scenery(inputDICT):
-    scenLIST = articut.getOpenDataPlaceLIST(inputDICT)
-    #temlist = articut.getOpenDataPlaceLIST(inputDICT)
-    #    scenLIST = []
-    #    for i in temlist:
-    #        if i != [] and i[0][2] not in scenLIST:
-    #            scenLIST.append(i[0][2])        
+    temp = articut.getOpenDataPlaceLIST(inputDICT)
+    scenLIST = []
+    if(temp != None):
+        for i in temp:
+            if i != [] and i[0][2] not in scenLIST:
+                scenLIST.append(i[0][2])        
     return scenLIST
     
 def law(inputDICT):
@@ -48,14 +50,14 @@ def name(inputDICT):
 def termFreq(inputLIST):
     result = {}
     for word in inputLIST:           
-        if result.get(word):
-            result[word] = result.get(word) + 1
+        if word:
+            result[word] = result[word] + 1
         else:
             result[word] = 1 
     return result 
     
-def money(resultDICT):
-    moneyLIST = articut.getCurrencyLIST(resultDICT)
+def money(inputDICT):
+    moneyLIST = articut.getCurrencyLIST(inputDICT)
     return moneyLIST
 
 if __name__ == "__main__":
@@ -63,7 +65,8 @@ if __name__ == "__main__":
 
     FilePathTUPLE = ("../example/tourblog.json" , "../example/刑事判決_106,交簡,359_2017-02-21.json", "../example/news.json")    
 
-    tourblogSTR = jsonTextReader(FilePathTUPLE[0])["content"].replace(" ", "")
+    tourblogSTR = jsonTextReader(FilePathTUPLE[0], "content")
+    tourblogSTR = tourblogSTR.replace(" ", "")
     #print("讀到字串：{}\n".format(tourblogSTR))
     resultDICT = articut.parse(tourblogSTR, level = "lv2", openDataPlaceAccessBOOL = True)
     locLIST = location(resultDICT)
@@ -75,8 +78,9 @@ if __name__ == "__main__":
     jsonFileWriter(jsonDICT, jsonFileName)  
     print("讀到字典：{}\n".format(jsonDICT))    
 
-    lawSTR = jsonTextReader(FilePathTUPLE[1])["mainText"].replace(" ", "")
-    lawSTR = jsonTextReader(FilePathTUPLE[1])["mainText"].replace("\r\n", "")
+    lawSTR = jsonTextReader(FilePathTUPLE[1], "mainText")
+    lawSTR = lawSTR.replace(" ", "")
+    lawSTR = lawSTR.replace("\r\n", "")
     #print("讀到字串：{}\n".format(lawSTR))
     resultDICT_2 = articut.parse(lawSTR, level = "lv2")
     lawLIST = law(resultDICT_2)
@@ -86,7 +90,8 @@ if __name__ == "__main__":
     jsonFileWriter(jsonDICT_2, jsonFileName_2)  
     print("讀到字典：{}\n".format(jsonDICT_2))
 
-    newsSTR = jsonTextReader(FilePathTUPLE[1])["content"].replace(" ", "")
+    newsSTR = jsonTextReader(FilePathTUPLE[2], "content")
+    newsSTR = newsSTR.replace(" ", "")
     #print("讀到字串：{}\n".format(newsSTR))
     resultDICT_3 = articut.parse(newsSTR, level = "lv2")
     nameLIST = name(resultDICT_3)
