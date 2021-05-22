@@ -63,10 +63,10 @@ def easy2Sentence(inputSTR):
 	return inputLIST
 
 # 把 eventLIST 寫入 DICT
-def addDICT( jsonDICT, key, eventLIST):
+def addDICT( jsonDICT, key, eventLIST ):
 	for i in eventLIST:
-		if not (i == '\n' or i == []):
-			jsonDICT[key].append( tuple(i))
+		if not (i == '\n' or i == [] ):
+			jsonDICT[key].append( tuple(i) )
 	return jsonDICT
 
 if __name__== "__main__":
@@ -84,13 +84,13 @@ if __name__== "__main__":
 
 	# 處理倉鼠
 
-	inputSTR = txtReader("../example/text.txt")
-	inputLIST = easy2Sentence(inputSTR)
+	inputpuipuiSTR = txtReader("../example/text.txt")
+	inputpuipuiLIST = easy2Sentence(inputpuipuiSTR)
 
 	'''
 	用 lv3 取得 event
 	'''
-	puipuiDICT_lv3 = main(inputSTR, articut, "lv3")
+	puipuiDICT_lv3 = main(inputpuipuiSTR, articut, "lv3")
 	puipuiEventLIST = puipuiDICT_lv3["event"]
 
 	# 倉鼠的知識，存入 json
@@ -101,19 +101,20 @@ if __name__== "__main__":
 	'''
 	用 lv2 切，取得 Verb
 	'''
-	puipuiDICT_lv2 = main(inputSTR, articut, "lv2")
+	puipuiDICT_lv2 = main(inputpuipuiSTR, articut, "lv2")
 	puipuiVerbLIST = articut.getVerbStemLIST(puipuiDICT_lv2)
 	pprint( puipuiVerbLIST)
 
 	# 處理皇帝企鵝
-	
-	# TODO
-
-
+	inputpenguinSTR = txtReader("./penguin.txt")
+	inputpenguinLIST = easy2Sentence(inputpenguinSTR)
+	penguinDICT_lv3 = main(inputpenguinSTR, articut, "lv3")
+	penguinEventLIST = penguinDICT_lv3["event"]
+	pprint(penguinEventLIST)
 	# 皇帝企鵝的知識，存入 json
 	jsonDICT = addDICT( jsonDICT, "皇帝企鵝", penguinEventLIST)
 	# 確認沒問題刪掉這行註解下面 print
-	print( jsonDICT)
+	print( jsonDICT )
 
 	# 將 jsonDICT 存入 week12_CSIE112.json
 	jsonFileWriter( jsonDICT, "./week12_CSIE112.json")
