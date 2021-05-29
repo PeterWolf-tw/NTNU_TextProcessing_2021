@@ -8,7 +8,7 @@ import json
 if __name__ == "__main__":
     simLIST = ["睡覺","綠茶","可愛","運動","決定","生日","冷藏","下雨","動物","飲料"]
     simDC = {}
-    model = models.Word2Vec.load("C:/Users/user/Downloads/wiki2019tw_word2vec_cbow_d300/wiki2019tw_word2vec_cbow_d300/wiki2019tw_word2vec_cbow_d300.model") #請適度調整你的模型目錄位置
+    model = models.Word2Vec.load("wiki2019tw_word2vec_cbow_d300.model") #請適度調整你的模型目錄位置
     for s in simLIST:
         simResult = model.wv.most_similar((s),topn = 10)
         for simWord in simResult:
