@@ -7,4 +7,6 @@ __pycache__*
 *.zip
 *.wpu
 *.wpr
+*.npy
+*.model
 account.info
