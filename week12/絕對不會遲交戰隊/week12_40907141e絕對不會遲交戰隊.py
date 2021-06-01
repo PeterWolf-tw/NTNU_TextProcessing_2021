@@ -19,7 +19,7 @@ def EventAnalysis(inputSTR, nlptool):
     return resultDICT
 
 if __name__== "__main__":
-    articut = Articut(username = "a0915751010@gmail.com", apikey = "4#-!FX^Vr5kBaznKL2U7egRwkU=Hx*k")  
+    articut = Articut(username = "nlp2020@droidtown.co", apikey="yfYwawQRAvuCkPR#W2uug+bpZoN7cEwyfYwawQRAvuCkPR#W2uug+bpZoN7cEw")  
     fileTUPLE = ("../example/text.txt", "./A. forsteri.txt")
     MouseSTR = jsonTextReader(fileTUPLE[0])
     #print(MouseSTR)
@@ -46,5 +46,5 @@ if __name__== "__main__":
         if item != '\n' and item != []:
             ResultDICT["皇帝企鵝"].append(item)
     print(ResultDICT)
-    MyjsonName = "week12_絕對不會遲交戰隊_40775012H.json"
+    MyjsonName = "week12_絕對不會遲交戰隊_40907141e.json"
     jsonFileWriter(ResultDICT, MyjsonName)       
