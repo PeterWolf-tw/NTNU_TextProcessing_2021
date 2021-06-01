@@ -91,9 +91,9 @@ def contentWordPlusPosCounter(inputSTR):
     return wordCountLIST
 
 if __name__=="__main__":
-    with open ("dbp.txt", encoding="utf-8")as f:
+    with open ("../example/dbp.txt", encoding="utf-8")as f:
         dbpSTR = f.read()
-    with open ("pbd.txt", encoding="utf-8")as f:
+    with open ("../example/pbd.txt", encoding="utf-8")as f:
         pbdSTR = f.read()
     
     charCount_dbp = charCounter(dbpSTR)
