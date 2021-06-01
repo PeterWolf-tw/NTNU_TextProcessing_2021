@@ -32,7 +32,7 @@ def removeEmptyList(LIST):
 
 
 if __name__ == "__main__":
-    APIinfo = "account40947016S.info"
+    APIinfo = "account40947021S.info"
     LIST = json2DictReader(APIinfo)
     email = LIST["email"]
     API = LIST["API"]
