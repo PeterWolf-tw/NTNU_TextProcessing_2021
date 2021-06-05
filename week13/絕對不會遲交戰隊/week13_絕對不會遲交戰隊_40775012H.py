@@ -15,7 +15,7 @@ if __name__ == "__main__":
     simLIST = ["綠茶", "珍珠", "奶茶", "半糖少冰", "療癒", "萌", "寵物", "貓咪", "海豹", "水獺"]
     resultDICT = {}
     
-    model = models.Word2Vec.load("wiki2019tw_word2vec_cbow_d300.model")
+    model = models.Word2Vec.load("./wiki2019tw_word2vec_cbow_d300/wiki2019tw_word2vec_cbow_d300.model")
 
     for s in simLIST:
         simResult = model.wv.most_similar((s),topn = 10)
